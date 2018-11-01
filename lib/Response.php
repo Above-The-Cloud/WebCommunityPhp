@@ -11,6 +11,7 @@ class Response
 {
     static public function send($code, $msg, $data)
     {
+        $log = new Log();
         echo json_encode(['code' => $code, 'msg' => $msg, 'data' => $data]);
         exit;
     }
