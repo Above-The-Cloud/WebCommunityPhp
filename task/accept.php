@@ -14,7 +14,7 @@ $publish_id = $_POST['publish_id'] ?? 0;
 $status = $_POST['status'] ?? -1;//0:空闲；1：已接受；2：已完成
 
 $log = new \lib\Log();
-$rr = new \lib\RR();
+$rr = new \lib\RR("task@accept");
 $rr->recv($_POST);
 
 if ($uid <= 0 || $publish_id <= 0 || $status <= -1) {

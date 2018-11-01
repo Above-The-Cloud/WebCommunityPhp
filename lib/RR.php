@@ -14,22 +14,24 @@ class RR
     private $log;
     private $traceId;
     private $request;
+    private $interface;
 
-    public function __construct()
+    public function __construct($interface='')
     {
+        $this->interface=$interface;
         $this->log = new Log();
         $this->traceId = time().rand();
     }
 
     public function recv($request){
         $this->request = $request;
-        $this->log->info("request log|traceId:".$this->traceId."|"."params:".json_encode($request));
+        $this->log->info($this->interface."|request log|traceId:".$this->traceId."|"."params:".json_encode($request));
     }
 
     public function send($code=0, $msg='success', $data=[])
     {
         $res = ['code' => $code, 'msg' => $msg, 'data' => $data];
-        $this->log->info("response log|traceId:".$this->traceId."|"."return:".json_encode($res));
+        $this->log->info($this->interface."|response log|traceId:".$this->traceId."|"."return:".json_encode($res));
         echo json_encode($res);
         exit;
     }
@@ -37,7 +39,7 @@ class RR
     public function finish($code=0, $msg='success', $data=[])
     {
         $res = ['code' => $code, 'msg' => $msg, 'data' => $data];
-        $this->log->info("response log|traceId:".$this->traceId."|"."return:".json_encode($res));
+        $this->log->info($this->interface."|response log|traceId:".$this->traceId."|"."return:".json_encode($res));
         echo json_encode($res);
         exit;
     }
